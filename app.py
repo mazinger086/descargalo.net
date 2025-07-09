@@ -1,7 +1,11 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, send_from_directory
 import subprocess
+import os
+import uuid
 
 app = Flask(__name__)
+DOWNLOAD_FOLDER = "videos"
+os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
 
 @app.route('/')
 def index():
@@ -15,14 +19,22 @@ def descargar():
         return jsonify({'success': False, 'error': 'URL vacía'})
 
     try:
-        # Ejecutar yt-dlp para obtener el link directo
-        result = subprocess.run(['yt-dlp', '-g', url], capture_output=True, text=True)
-        if result.returncode != 0 or not result.stdout.strip():
-            return jsonify({'success': False, 'error': 'Error al procesar el enlace'})
-        download_url = result.stdout.strip().split('\n')[0]
-        return jsonify({'success': True, 'download': download_url})
+        filename = f"{uuid.uuid4().hex}.mp4"
+        output_path = os.path.join(DOWNLOAD_FOLDER, filename)
+
+        result = subprocess.run(['python', '-m', 'yt_dlp', '-o', output_path, url], capture_output=True, text=True)
+
+        if result.returncode != 0 or not os.path.exists(output_path):
+            return jsonify({'success': False, 'error': 'No se pudo descargar el video.'})
+
+        return jsonify({'success': True, 'download': f'/descargar/{filename}'})
+
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/descargar/<filename>')
+def serve_video(filename):
+    return send_from_directory(DOWNLOAD_FOLDER, filename, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
