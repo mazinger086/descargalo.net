@@ -15,26 +15,33 @@ def index():
 def terms():
     return render_template('terms.html')
 
+# @app.route('/api/descargar', methods=['POST'])
+# def descargar():
+#     data = request.get_json()
+#     url = data.get('url')
+#     if not url:
+#         return jsonify({'success': False, 'error': 'URL vacía'})
+
+#     try:
+#         filename = f"{uuid.uuid4().hex}.mp4"
+#         output_path = os.path.join(DOWNLOAD_FOLDER, filename)
+
+#         result = subprocess.run(['python', '-m', 'yt_dlp', '-o', output_path, url], capture_output=True, text=True)
+
+#         if result.returncode != 0 or not os.path.exists(output_path):
+#             return jsonify({'success': False, 'error': 'No se pudo descargar el video.'})
+
+#         return jsonify({'success': True, 'download': f'/descargar/{filename}'})
+
+#     except Exception as e:
+#         return jsonify({'success': False, 'error': str(e)})
+
 @app.route('/api/descargar', methods=['POST'])
 def descargar():
-    data = request.get_json()
-    url = data.get('url')
-    if not url:
-        return jsonify({'success': False, 'error': 'URL vacía'})
+    url = request.json.get('url')
+    print("URL recibida desde frontend:", url)  # Aparecerá en los logs de Render
+    return {"url_recibida": url}, 200
 
-    try:
-        filename = f"{uuid.uuid4().hex}.mp4"
-        output_path = os.path.join(DOWNLOAD_FOLDER, filename)
-
-        result = subprocess.run(['python', '-m', 'yt_dlp', '-o', output_path, url], capture_output=True, text=True)
-
-        if result.returncode != 0 or not os.path.exists(output_path):
-            return jsonify({'success': False, 'error': 'No se pudo descargar el video.'})
-
-        return jsonify({'success': True, 'download': f'/descargar/{filename}'})
-
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/descargar/<filename>')
 def serve_video(filename):

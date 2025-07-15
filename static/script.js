@@ -48,7 +48,7 @@ async function descargar() {
 function compartir() {
     if (navigator.share) {
         navigator.share({
-            title: 'Descargalo.om.ar',
+            title: 'Descargalo.com.ar',
             text: 'Probá este descargador de videos gratis.',
             url: 'https://descargalo-net.onrender.com/'
         });
