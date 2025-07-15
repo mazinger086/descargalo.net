@@ -1,35 +1,4 @@
 
-//OLD
-// async function descargar() {
-//     const url = document.getElementById("videoURL").value;
-//     document.getElementById("status").innerText = "Procesando...";
-
-//     const res = await fetch("/api/descargar", {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify({ url })
-//     });
-
-//     const data = await res.json();
-
-//     if (data.success && data.download) {
-//         const a = document.createElement("a");
-//         a.href = data.download;
-//         a.download = "video.mp4";  // nombre sugerido
-//         document.body.appendChild(a);
-//         a.click();
-//         a.remove();
-
-//     } else {
-//         document.getElementById("status").innerText = "Error: " + (data.error || "No se pudo descargar el video.");
-//     }
-
-
-
-// }
-
-// NEW
-
 async function descargar() {
     const urlInput = document.getElementById("videoURL");
     const status = document.getElementById("status");
@@ -73,5 +42,17 @@ async function descargar() {
         status.innerText = "❌ Error inesperado. Verificá tu conexión.";
     } finally {
         boton.disabled = false;
+    }
+}
+
+function compartir() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Descargalo.om.ar',
+            text: 'Probá este descargador de videos gratis.',
+            url: 'https://descargalo-net.onrender.com/'
+        });
+    } else {
+        alert("Tu navegador no permite compartir directamente.");
     }
 }
