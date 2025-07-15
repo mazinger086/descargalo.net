@@ -12,10 +12,59 @@
         <p>Pegá un enlace de TikTok, Instagram, YouTube, Facebook o X:</p>
         <input type="text" id="videoURL" placeholder="https://..." />
         <button onclick="descargar()">Descargar</button>
+        <a href="https://wa.me/" target="_blank" class="whatsapp-btn">
+        📱 Estados de WhatsApp
+        </a>
         <p id="status"></p>
     </div>
+
+    <section class="download-card">
+    <h2>Cómo descargar videos y fotos usando Descargalo.net</h2>
+    <ol>
+        <li>Abre tu red social en tu aplicación o navegador y accede a tu cuenta.</li>
+        <li>Busca la publicación que quieras guardar (puede ser una video, reel, historia) y copia su enlace.</li>
+        <li>Ve a <strong>Descargalo.net</strong>, pega el enlace en el campo indicado y haz clic en <strong>"Descargar"</strong>.</li>
+        <li>Nuestro sistema procesará el enlace y te permitirá descargar el contenido directamente a tu dispositivo.</li>
+        <li>Una vez descargado, puedes disfrutar del video o la foto cuando quieras, o compartirlo fácilmente en tus redes sociales o estados.</li>
+    </ol>
+    </section>
+
+    <section class="features-section">
+    <h2>Funciones destacadas de Descargalo</h2>
+    <ul class="features-list">
+        <li>📽️ Guarda Reels con excelente resolución directamente desde el enlace.</li>
+        <li>📐 Elegí la dimensión y calidad del archivo antes de descargarlo.</li>
+        <li>🌐 Compatible con perfiles públicos de distintas plataformas sociales.</li>
+        <li>🔒 Posibilidad de obtener videos de cuentas privadas: solo copiá el enlace del contenido.</li>
+        <li>🕵️‍♂️ Privacidad garantizada: no almacenamos información personal ni historial de descargas.</li>
+    </ul>
+    </section>
+
+    <div class="terms-container">
+    <h2>Nota importante sobre el uso de nuestra plataforma</h2>
+    <p>
+      Esta herramienta fue creada con el propósito de facilitar a los usuarios la descarga de videos e imágenes que ellos mismos hayan compartido. No obstante, nos reservamos el derecho de bloquear el acceso al servicio si se detecta un uso indebido que infrinja la privacidad o los derechos de autor de terceros.
+    </p>
+
+    <p>
+      Antes de utilizar la aplicación o navegar por este sitio, te recomendamos que leas detenidamente nuestras 
+      <strong>Condiciones de Uso</strong> (también conocidas como ToS). Puedes consultar el documento completo de Términos y Condiciones desde 
+      <a href="{{ url_for('terms') }}">este enlace</a>. A continuación, te resumimos algunos aspectos esenciales:
+    </p>
+
+    <ol class="list-style">
+      <li><strong>Descargalo™</strong> es un proyecto independiente, diseñado y administrado exclusivamente por nuestro equipo. <strong>No tenemos ningún vínculo con redes sociales como Instagram, Facebook, TikTok o YouTube.</strong></li>
+      <li>El nombre <strong>Descargalo™</strong> es una marca registrada de nuestro equipo y se utiliza únicamente en relación con nuestros servicios, aplicaciones y páginas web. El término debe entenderse como una unidad, sin asociación alguna con empresas u organizaciones externas.</li>
+      <li>Con el fin de mantener el proyecto y apoyar iniciativas de desarrollo tecnológico sin fines lucrativos, incluimos anuncios publicitarios. Nuestros colaboradores publicitarios podrían emplear cookies para personalizar la experiencia publicitaria. Tienes total libertad para rechazar las cookies o dejar de usar nuestra plataforma en cualquier momento.</li>
+    </ol>
+
+    <p>
+      Al continuar utilizando este sitio web o la aplicación, se considera que aceptas nuestras condiciones y políticas (incluyendo futuras modificaciones). Si no estás conforme con alguna parte del contenido, te sugerimos cesar el uso de nuestros servicios de inmediato.
+    </p>
+  </div>
+
     <footer>
-        <p>&copy; 2025 descargalo.net | <a href="../terms.html">Términos de uso</a></p>
+        <p>&copy; 2025 descargalo.net</p>
     </footer>
     <script src="/static/script.js"></script>
 </body>

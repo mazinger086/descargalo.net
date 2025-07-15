@@ -3,6 +3,7 @@ body {
     text-align: center;
     background: #f2f2f2;
     padding: 2rem;
+    font-size: 16px;
 }
 
 .container {
@@ -15,7 +16,7 @@ body {
 }
 
 input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin: 1rem 0;
     font-size: 16px;
@@ -27,7 +28,170 @@ button {
     cursor: pointer;
 }
 
+.whatsapp-btn {
+    display: inline-block;
+    background-color: #25d366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease;
+  }
+
+  .whatsapp-btn:hover {
+    background-color: #1ebe57;
+  }
+
 #status {
     margin-top: 1rem;
     font-weight: bold;
 }
+
+.download-card {
+    background: #e0f2fe; /* un azul claro agradable */
+    border-radius: 12px;
+    padding: 30px 25px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #034078;
+  }
+  .download-card h2 {
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+  .download-card ol {
+    padding-left: 20px;   
+    line-height: 1.6;
+  }
+  .download-card ol li {
+    margin-bottom: 15px;
+  }
+  .download-card strong {
+    color: #007bff;
+  }
+
+  @media (max-width: 640px) {
+    .download-card {
+      padding: 20px 15px;
+      margin: 20px 15px;
+    }
+    .download-card h2 {
+      font-size: 1.5rem;
+    }
+    
+  }
+
+.features-section {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #f1f9f6;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .features-section h2 {
+    color: #1e88e5;
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .features-list {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+    line-height: 1.8;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .features-list li {
+    margin-bottom: 12px;
+    padding-left: 24px;
+    position: relative;
+  }
+
+  .features-list li::before {
+    content: "✔️";
+    position: absolute;
+    left: -5px;
+    color: #4caf50;
+  }
+
+  @media (max-width: 600px) {
+    .features-section {
+      padding: 20px;
+      margin: 30px 16px;
+    }
+
+    .features-section h2 {
+      font-size: 22px;
+    }
+
+    .features-list {
+      font-size: 16px;
+    }
+  }
+
+.terms-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .terms-container h2 {
+      color: #1e88e5;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .terms-container p {
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .terms-container ol {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    .terms-container li {
+      margin-bottom: 15px;
+      line-height: 1.7;
+    }
+
+    .terms-container a {
+      color: #1e88e5;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .terms-container a:hover {
+      text-decoration: underline;
+    }
+
+    .list-style {        
+        text-align: left;
+    }
+
+    @media (max-width: 600px) {
+      .terms-container {
+        padding: 20px;
+        margin: 20px;
+      }
+
+      .terms-container h2 {
+        font-size: 24px;
+      }
+    }

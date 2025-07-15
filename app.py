@@ -11,6 +11,10 @@ os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
 def index():
     return render_template('index.html')
 
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
 @app.route('/api/descargar', methods=['POST'])
 def descargar():
     data = request.get_json()
