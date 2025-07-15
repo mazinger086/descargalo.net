@@ -1,10 +1,10 @@
 from flask import Flask, request, render_template, jsonify, send_from_directory
-import subprocess
 import os
 import uuid
+import yt_dlp
 
 app = Flask(__name__)
-DOWNLOAD_FOLDER = "videos"
+DOWNLOAD_FOLDER = "/tmp"
 os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
 
 @app.route('/')
@@ -26,18 +26,27 @@ def descargar():
         filename = f"{uuid.uuid4().hex}.mp4"
         output_path = os.path.join(DOWNLOAD_FOLDER, filename)
 
-        result = subprocess.run(['python', '-m', 'yt_dlp', '-o', output_path, url], capture_output=True, text=True)
+        ydl_opts = {
+            'format': 'best',
+            'outtmpl': output_path,
+            'quiet': True,
+        }
 
-        if result.returncode != 0 or not os.path.exists(output_path):
-            return jsonify({'success': False, 'error': 'No se pudo descargar el video.'})
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            try:
+                ydl.download([url])
+            except Exception as e:
+                print("ERROR de yt-dlp:", e)
+                return jsonify({'success': False, 'error': f'yt-dlp falló: {str(e)}'})
+
+
+        if not os.path.exists(output_path):
+            return jsonify({'success': False, 'error': 'El archivo no se generó correctamente.'})
 
         return jsonify({'success': True, 'download': f'/descargar/{filename}'})
 
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
-
-
-
 
 @app.route('/descargar/<filename>')
 def serve_video(filename):
