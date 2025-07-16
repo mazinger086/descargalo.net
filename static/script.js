@@ -75,8 +75,18 @@ async function descargar() {
 }
 
  function toggleMenu() {
-    const nav = document.getElementById('nav-links');
-    nav.classList.toggle('show');
+    const nav = document.getElementById('nav-links'); 
+    const inicio = document.getElementById('inicio');   
+    nav.classList.toggle('show');    
+
+    if (nav.classList.contains('show')) {
+        console.log('True');            
+        inicio.style.setProperty('margin-top', '14rem', 'important');
+    } else {
+        console.log('False');        
+        inicio.style.removeProperty('margin-top');
+    }
+
   }
 
 

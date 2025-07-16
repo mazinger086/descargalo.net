@@ -86,7 +86,7 @@ nav a:hover {
     position: absolute;
     top: 60px;
     left: 0;
-    padding: 1rem 0rem;
+    padding: 2rem 0rem;
   }
 
   nav.show {
@@ -316,4 +316,5 @@ button {
   .terms-container h2 {
     font-size: 24px;
   }
+ 
 }
