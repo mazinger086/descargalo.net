@@ -29,8 +29,7 @@ def descargar():
         ydl_opts = {
             'format': 'best',
             'outtmpl': output_path,
-            'cookiesfrombrowser': ('chrome',),
-            'verbose': True,
+            'quiet': True,
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -39,6 +38,7 @@ def descargar():
             except Exception as e:
                 print("ERROR de yt-dlp:", e)
                 return jsonify({'success': False, 'error': f'yt-dlp falló: {str(e)}'})
+
 
         if not os.path.exists(output_path):
             return jsonify({'success': False, 'error': 'El archivo no se generó correctamente.'})
