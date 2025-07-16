@@ -1,18 +1,27 @@
-
 async function descargar() {
     const urlInput = document.getElementById("videoURL");
-    const status = document.getElementById("status");
     const boton = document.querySelector("button");
-
     const url = urlInput.value.trim();
 
     if (!url) {
-        status.innerText = "Por favor, pegá un enlace válido.";
+        Swal.fire({
+            icon: 'warning',
+            title: 'Enlace vacío',
+            text: 'Por favor, pegá un enlace válido.'
+        });
         return;
     }
 
     // Mostrar mensaje de carga
-    status.innerText = "🔄 Procesando... descargando video...";
+    Swal.fire({
+        title: 'Descargando...',
+        text: 'Procesando el video, por favor esperá...',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
     boton.disabled = true;
 
     try {
@@ -33,26 +42,36 @@ async function descargar() {
             a.click();
             a.remove();
 
-            status.innerText = "✅ ¡Video descargado!";
-            urlInput.value = ""; // ✅ Limpiar input solo si se descarga bien
+            // 🎉 Confeti
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            Swal.fire({
+                icon: 'success',
+                title: '¡Descarga completa!',
+                text: 'El video se descargó correctamente.'
+            });
+
+            urlInput.value = "";
         } else {
-            status.innerText = "❌ Error: " + (data.error || "No se pudo procesar el video.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.error || "No se pudo procesar el video."
+            });
         }
     } catch (err) {
-        status.innerText = "❌ Error inesperado. Verificá tu conexión.";
+        Swal.fire({
+            icon: 'error',
+            title: 'Error inesperado',
+            text: 'Verificá tu conexión o intentá más tarde.'
+        });
     } finally {
         boton.disabled = false;
     }
 }
 
-function compartir() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Descargalo.com.ar',
-            text: 'Probá este descargador de videos gratis.',
-            url: 'https://descargalo-net.onrender.com/'
-        });
-    } else {
-        alert("Tu navegador no permite compartir directamente.");
-    }
-}
+
