@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template, jsonify, send_from_directory
-import requests
 import os
 import uuid
 import yt_dlp
@@ -24,27 +23,6 @@ def descargar():
         return jsonify({'success': False, 'error': 'URL vacía'})
 
     try:
-        # Si es Instagram, usar SnapSave
-        if "instagram.com" in url:
-            headers = {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-            payload = {'q': url}
-            response = requests.post('https://snapsave.app/api/ajaxSearch', headers=headers, data=payload)
-            result = response.json()
-
-            if result.get('status') != 'ok':
-                return jsonify({'success': False, 'error': 'SnapSave no pudo procesar el enlace'})
-
-            links = result.get('data', {}).get('medias', [])
-            if not links:
-                return jsonify({'success': False, 'error': 'No se encontraron videos para descargar'})
-
-            download_url = links[0].get('url')
-            return jsonify({'success': True, 'download': download_url})
-
-        # Si no es Instagram, usar yt-dlp (TikTok, YouTube, etc.)
         filename = f"{uuid.uuid4().hex}.mp4"
         output_path = os.path.join(DOWNLOAD_FOLDER, filename)
 
@@ -55,7 +33,12 @@ def descargar():
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([url])
+            try:
+                ydl.download([url])
+            except Exception as e:
+                print("ERROR de yt-dlp:", e)
+                return jsonify({'success': False, 'error': f'yt-dlp falló: {str(e)}'})
+
 
         if not os.path.exists(output_path):
             return jsonify({'success': False, 'error': 'El archivo no se generó correctamente.'})
