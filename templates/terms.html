@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back" />
     <title>Términos de Uso</title>
 </head>
 <body>
@@ -31,6 +32,27 @@
     margin-bottom: 16px;
     font-size: 16px;
   }
+
+  .material-symbols-outlined {
+    color: #ffffff;
+    font-variation-settings:
+    'FILL' 100',
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+
+  .btn_back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #005999;
+    color: #ffffff;
+  }
+
 </style>
 
 <section class="terms-section">
@@ -82,6 +104,12 @@
 
     <p>Si no estás de acuerdo con nuestros términos o políticas, por favor no utilices nuestros servicios.</p>
   </div>
+
+  <div class="btn_back">
+    <a href="{{ url_for('index') }}"><span class="material-symbols-outlined">arrow_back</span></a>
+  </div>
+
+
 </section>
 </body>
 
